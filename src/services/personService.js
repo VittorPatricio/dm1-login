@@ -1,5 +1,5 @@
 import { db } from './database/firebase'
-import { set, push, ref, get } from "firebase/database";
+import { set, push, ref, get, remove, update } from "firebase/database";
 
 async function newPerson(nome,email, uuidAuth, telefone) {   
 
@@ -89,4 +89,20 @@ async function personGetByUuidAuth(uuidauth) {
     }
 }
 
-export { newPerson, updatePerson, personGetAll , personGetById, personGetByUuidAuth }
+async function personDelete(id){
+    const dbref = ref(db, `person/${id}`);
+    try {
+        await remove(dbref);
+        return { success: true, message: "Registro atualizado com sucesso" };
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error("Erro ao fazer ao atualizar o registro:", error.message);
+            throw new Error(error.message);
+        } else {
+            console.error("Erro desconhecido ao fazer a atualização do registro");
+            throw new Error("Erro desconhecido");
+        }
+    }
+}
+
+export { newPerson, personDelete, personGetAll , personGetById, personGetByUuidAuth, updatePerson }

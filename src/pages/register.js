@@ -30,12 +30,12 @@ const Register = ({navigation}) => {
   async function handleOnClick(){
   //
     const usuario = await createUser(email, password, nome, telefone );
-    // if ( usuario ) {
-    //    const uuid = usuario?.user?.uid;
-    //    console.log(usuario);
-    //    const person =  newPerson(nome, email,  uuid , telefone );
-    // }
-    // console.log(usuario);
+    if ( usuario ) {
+       const uuid = usuario?.user?.uid;
+       console.log(usuario);
+       const person =  newPerson(nome, email,  uuid , telefone );
+    }
+     console.log(usuario);
   }
 
   return (
